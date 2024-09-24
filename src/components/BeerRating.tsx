@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Judge from "./Judge";
+// import Judge from "./Judge";
 // import { Range } from "react-daisyui";
 
 interface Props {
