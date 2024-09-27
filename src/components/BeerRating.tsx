@@ -44,7 +44,7 @@ Props) {
   }, [scoreLaurent, scoreLeo, name]);
 
   return (
-    <div className="grid grid-cols-3 grid-rows-1 gap-8 p-8 w-full bg-gray-200 rounded-2xl shadow-2xl ">
+    <div className="lfex flex-col lg:grid grid-cols-3 grid-rows-1 gap-8 p-8 w-full bg-gray-200 rounded-2xl shadow-2xl ">
       <div className="flex w-full mx-auto">
         <div className="card bg-base-100 w-full shadow-xl">
           <figure className="h-56">
@@ -71,7 +71,7 @@ Props) {
       <div className="col-span-2 flex flex-col gap-16 my-auto">
         {/* <Judge name="Romuald" />
         <Judge name="Clément" /> */}
-        <div className="flex flex-col w-auto gap-4 items-center">
+        <div className="flex flex-col w-auto mt-16 lg:mt-0 gap-4 items-center">
           <p className="text-xl text-center w-full">Laurent</p>
           <div className="flex flex-col w-full">
             <input

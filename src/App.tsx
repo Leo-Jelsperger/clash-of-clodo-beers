@@ -1,6 +1,6 @@
 import BeerRating from "./components/BeerRating";
 import Hero from "./components/Hero";
-
+import "./App.css";
 export default function App() {
   return (
     <div className="flex flex-col">
@@ -8,8 +8,8 @@ export default function App() {
       <div className="z-50">
         {/* <div className="itsMe mt-[100vh] w-full h-16 bg-gradient-to-b from-transparent to-white"></div> */}
         <div className="mt-12">
-          <div className="flex flex-col max-w-screen-xl mx-auto gap-8 p-8 bg-gray-400 rounded-3xl">
-            <div id="myDiv">
+          <div className="flex flex-col max-w-screen-xl mx-auto gap-8 p-3 lg:p-8 lg:bg-gray-400 rounded-3xl">
+            <div className="myDiv">
               <BeerRating
                 name="8.6"
                 alcohol={8.6}
