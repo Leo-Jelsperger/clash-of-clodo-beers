@@ -1,7 +1,7 @@
 export default function Hero() {
   return (
     <div
-      className="hero min-h-screen sticky top-0"
+      className="hero min-h-dvh sticky top-0"
       style={{
         backgroundImage:
           "url(https://www.pixelstalk.net/wp-content/uploads/2016/07/Beer-Image-HD.jpg)",
