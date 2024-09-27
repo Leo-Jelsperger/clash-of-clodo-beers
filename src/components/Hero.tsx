@@ -1,4 +1,8 @@
-export default function Hero() {
+interface Props {
+  hidden?: boolean;
+}
+
+export default function Hero({ hidden }: Props) {
   return (
     <div
       className="hero min-h-dvh sticky top-0"
@@ -7,7 +11,10 @@ export default function Hero() {
           "url(https://www.pixelstalk.net/wp-content/uploads/2016/07/Beer-Image-HD.jpg)",
       }}>
       <div className="hero-overlay bg-opacity-60 backdrop-blur-[2px]"></div>
-      <div className="hero-content text-neutral-content text-center">
+      <div
+        className={`hero-content text-neutral-content text-center ${
+          hidden ? "opacity-0" : ""
+        }`}>
         <div className="max-w-screen-lg">
           <h1 className="my-4 lg:my-16 text-5xl lg:text-7xl font-bold uppercase bg-opacity-90 text-gray-800 bg-slate-200 rounded-3xl p-8">
             Clash of <br />
