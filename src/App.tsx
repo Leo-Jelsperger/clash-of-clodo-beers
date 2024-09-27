@@ -29,7 +29,7 @@ export default function App() {
       <Hero hidden={scrolled} />
       <div className="z-50">
         <div className="mt-12">
-          <div className="flex flex-col max-w-screen-xl mx-auto gap-8 p-3 lg:p-8 rounded-3xl lg:bg-gray-400 lg:bg-opacity-90">
+          <div className="flex flex-col max-w-screen-xl mx-auto gap-8 p-3 lg:p-8 rounded-3xl lg:bg-opacity-90">
             <div
               id="myDiv"
               className="myDiv">
