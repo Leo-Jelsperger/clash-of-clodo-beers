@@ -8,7 +8,7 @@ interface Props {
   price: number;
   picture: string;
   // factor: number;
-  // onScoreChange: (score: number, name: string) => void;
+  onScoreChange?: (score: number, name: string) => void;
 }
 
 export default function BeerRating({
@@ -16,8 +16,8 @@ export default function BeerRating({
   alcohol,
   price,
   picture,
-}: // onScoreChange,
-Props) {
+  onScoreChange = () => {},
+}: Props) {
   const calc = alcohol && price ? alcohol / price : 0;
   const factor = calc.toPrecision(4);
 
@@ -39,12 +39,13 @@ Props) {
     setAverageTaste(averageTaste);
     const score =
       ((Number(scoreLaurent) + Number(scoreLeo)) / 20 + 1) * Number(factor);
-    setFinalScore(score);
-    // onScoreChange(score, name);
+    const roundedScore = Math.round(score * 100) / 100;
+    setFinalScore(roundedScore);
+    onScoreChange(roundedScore, name);
   }, [scoreLaurent, scoreLeo, name]);
 
   return (
-    <div className="lfex flex-col lg:grid grid-cols-3 grid-rows-1 gap-8 p-8 w-full bg-gray-200 rounded-2xl shadow-2xl ">
+    <div className="flex flex-col lg:grid grid-cols-3 grid-rows-1 gap-8 p-8 w-full bg-gray-200 rounded-2xl shadow-2xl ">
       <div className="flex w-full mx-auto">
         <div className="card bg-base-100 w-full shadow-xl">
           <figure className="h-56">
@@ -60,10 +61,8 @@ Props) {
             <p className="text-center w-full">Prix : {price}€</p>
             <p className="text-center w-full">Clodo Factor : {factor}</p>
             <p className="px-4 py-2 mt-8 bg-gray-200 w-full text-center text-xl rounded-full">
-              Score Final <br />{" "}
-              <span className="text-3xl font-extrabold">
-                {finalScore.toPrecision(4)}
-              </span>
+              Score Final <br />
+              <span className="text-3xl font-extrabold">{finalScore}</span>
             </p>
           </div>
         </div>
