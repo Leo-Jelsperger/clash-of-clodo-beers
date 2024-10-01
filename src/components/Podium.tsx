@@ -21,11 +21,10 @@ export default function Podium({ first, second, third }: Props) {
           alt=""
         />
       </div>
-
-      <div className="col-start-2 row-start-2 flex">
+      <div className="col-start-2 row-start-3 flex">
         <p className="m-auto text-black text-xl font-semibold">{first?.name}</p>
       </div>
-      <div className="col-start-2 row-start-3 flex bg-white w-fit mx-auto rounded-xl p-1">
+      <div className="col-start-2 row-start-2 flex bg-white w-fit mx-auto rounded-xl p-1">
         <img
           src={first?.picture}
           alt=""
@@ -38,12 +37,12 @@ export default function Podium({ first, second, third }: Props) {
         </div>
       </div>
 
-      <div className="col-start-1 row-start-3 flex">
+      <div className="col-start-1 row-start-4 flex">
         <p className="m-auto text-black text-xl font-semibold">
           {second?.name}
         </p>
       </div>
-      <div className="col-start-1 row-start-4 flex bg-white w-fit mx-auto rounded-xl p-1">
+      <div className="col-start-1 row-start-3 flex bg-white w-fit mx-auto rounded-xl p-1">
         <img
           src={second?.picture}
           alt=""
