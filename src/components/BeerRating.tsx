@@ -44,15 +44,15 @@ export default function BeerRating({
     onScoreChange(roundedScore, name);
   }
 
-  useEffect(() => {
-    const averageTaste = (Number(scoreLaurent) + Number(scoreLeo)) / 2;
-    // setAverageTaste(averageTaste);
-    const score =
-      ((Number(scoreLaurent) + Number(scoreLeo)) / 20 + 1) * Number(factor);
-    const roundedScore = Math.round(score * 100) / 100;
-    // setFinalScore(roundedScore);
-    onScoreChange(roundedScore, name);
-  }, [scoreLaurent, scoreLeo, name]);
+  // useEffect(() => {
+  //   const averageTaste = (Number(scoreLaurent) + Number(scoreLeo)) / 2;
+  //   setAverageTaste(averageTaste);
+  //   const score =
+  //     ((Number(scoreLaurent) + Number(scoreLeo)) / 20 + 1) * Number(factor);
+  //   const roundedScore = Math.round(score * 100) / 100;
+  //   setFinalScore(roundedScore);
+  //   onScoreChange(roundedScore, name);
+  // }, [scoreLaurent, scoreLeo, name]);
 
   return (
     <div className="flex flex-col lg:grid grid-cols-3 grid-rows-1 gap-8 p-8 w-full bg-gray-200 dark:bg-gray-400 rounded-2xl shadow-2xl ">
