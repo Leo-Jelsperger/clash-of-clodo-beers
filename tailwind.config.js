@@ -7,8 +7,8 @@ export default {
   },
   plugins: [daisyui],
   daisyui: {
-    themes: false, // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
-    darkTheme: "light", // name of one of the included themes for dark mode
+    themes: false, // false: only light +  | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
+    darkTheme: false, // name of one of the included themes for dark mode
     base: true, // applies background color and foreground color for root element by default
     styled: false, // include daisyUI colors and design decisions for all components
     utils: true, // adds responsive and modifier utility classes

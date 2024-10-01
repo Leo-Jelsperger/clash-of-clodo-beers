@@ -55,10 +55,10 @@ export default function Podium({ first, second, third }: Props) {
         </div>
       </div>
 
-      <div className="col-start-3 row-start-4 flex">
+      <div className="col-start-3 row-start-5 flex">
         <p className="m-auto text-black text-xl font-semibold">{third?.name}</p>
       </div>
-      <div className="col-start-3 row-start-5 flex bg-white w-fit mx-auto rounded-xl p-1">
+      <div className="col-start-3 row-start-4 flex bg-white w-fit mx-auto rounded-xl p-1">
         <img
           src={third?.picture}
           alt=""
