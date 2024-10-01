@@ -31,7 +31,7 @@ export default function Hero({ hidden }: Props) {
             ensemble.
           </p>
           <button
-            className="btn bg-gray-800 myBtn"
+            className="bg-white text-black px-4 py-2 rounded-lg"
             onClick={goToBeer}>
             Allons-y !
           </button>

@@ -69,10 +69,10 @@ export default function App() {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col text-black">
       <Hero hidden={scrolled} />
       <div className="z-50">
-        <div className="mt-12">
+        <div className="my-12">
           <div
             className="flex flex-col max-w-screen-xl mx-auto gap-8 p-3 lg:p-8 rounded-3xl lg:bg-opacity-90"
             id="myDiv">
@@ -88,11 +88,13 @@ export default function App() {
             ))}
           </div>
         </div>
-        <Podium
-          first={first}
-          second={second}
-          third={third}
-        />
+        <div className="mb-12">
+          <Podium
+            first={first}
+            second={second}
+            third={third}
+          />
+        </div>
       </div>
     </div>
   );

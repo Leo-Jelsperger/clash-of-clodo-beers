@@ -34,7 +34,7 @@ export default function BeerRating({
     setScoreLeo(event.target.value);
   };
 
-  useEffect(() => {
+  function NewScore() {
     const averageTaste = (Number(scoreLaurent) + Number(scoreLeo)) / 2;
     setAverageTaste(averageTaste);
     const score =
@@ -42,13 +42,23 @@ export default function BeerRating({
     const roundedScore = Math.round(score * 100) / 100;
     setFinalScore(roundedScore);
     onScoreChange(roundedScore, name);
+  }
+
+  useEffect(() => {
+    const averageTaste = (Number(scoreLaurent) + Number(scoreLeo)) / 2;
+    // setAverageTaste(averageTaste);
+    const score =
+      ((Number(scoreLaurent) + Number(scoreLeo)) / 20 + 1) * Number(factor);
+    const roundedScore = Math.round(score * 100) / 100;
+    // setFinalScore(roundedScore);
+    onScoreChange(roundedScore, name);
   }, [scoreLaurent, scoreLeo, name]);
 
   return (
-    <div className="flex flex-col lg:grid grid-cols-3 grid-rows-1 gap-8 p-8 w-full bg-gray-200 rounded-2xl shadow-2xl ">
+    <div className="flex flex-col lg:grid grid-cols-3 grid-rows-1 gap-8 p-8 w-full bg-gray-200 dark:bg-gray-400 rounded-2xl shadow-2xl ">
       <div className="flex w-full mx-auto">
         <div className="card bg-base-100 w-full shadow-xl">
-          <figure className="h-56">
+          <figure className="h-56 bg-white">
             <img
               src={picture}
               alt={name}
@@ -60,7 +70,7 @@ export default function BeerRating({
             <p className="text-center w-full">Degré alcoolique : {alcohol}°</p>
             <p className="text-center w-full">Prix : {price}€</p>
             <p className="text-center w-full">Clodo Factor : {factor}</p>
-            <p className="px-4 py-2 mt-8 bg-gray-200 w-full text-center text-xl rounded-full">
+            <p className="px-4 py-2 mt-8 bg-white w-full text-center text-xl rounded-full">
               Score Final <br />
               <span className="text-3xl font-extrabold">{finalScore}</span>
             </p>
@@ -122,11 +132,18 @@ export default function BeerRating({
               <span>10</span>
             </div>
           </div>
-          <div className="flex flex-col w-full gap-4 mt-16">
-            <p className="text-center text-xl">Note moyenne pour le goût</p>
-            <div className="h-16 aspect-square flex mx-auto bg-white rounded-full">
-              <p className="m-auto text-3xl font-bolder">{averageTaste}</p>
-            </div>
+        </div>
+        <div className="px-4 py-2 flex mx-auto bg-white rounded-xl hover:bg-gray-600 hover:text-white">
+          <button
+            className="text-2xl"
+            onClick={NewScore}>
+            Valider
+          </button>
+        </div>
+        <div className="flex flex-col w-full gap-4">
+          <p className="text-center text-xl">Note moyenne pour le goût</p>
+          <div className="h-16 aspect-square flex mx-auto bg-white rounded-full">
+            <p className="m-auto text-3xl font-bolder">{averageTaste}</p>
           </div>
         </div>
       </div>

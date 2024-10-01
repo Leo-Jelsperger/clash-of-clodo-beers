@@ -14,7 +14,7 @@ interface Props {
 
 export default function Podium({ first, second, third }: Props) {
   return (
-    <div className="grid grid-cols-3 grid-rows-7 max-w-screen-md h-96 mx-auto px-4 pt-2 gap-1 bg-gray-200 rounded-t-3xl">
+    <div className="grid grid-cols-3 grid-rows-7 max-w-screen-md h-96 mx-auto px-4 pt-4 gap-1 bg-gray-200 rounded-3xl">
       <div className="col-start-2 row-start-1 flex mx-auto animate-bounce pt-2">
         <img
           src="https://cdn-icons-png.flaticon.com/512/988/988868.png"
