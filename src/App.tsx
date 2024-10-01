@@ -5,33 +5,45 @@ import { useEffect, useState } from "react";
 import BeerList from "./components/BeerList";
 import Podium from "./components/Podium";
 
+type Beer = {
+  name: string;
+  key: string;
+  alcohol: number;
+  price: number;
+  picture: string;
+};
+
 const viewH = screen.height * 0.8;
 const beers = BeerList();
 
 export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [scoreEntity, setScoreEntity] = useState<Record<string, number>>({});
-  const [first, setFirst] = useState(null);
-  const [second, setSecond] = useState(null);
-  const [third, setThird] = useState(null);
+  const [first, setFirst] = useState<Beer>();
+  const [second, setSecond] = useState<Beer>();
+  const [third, setThird] = useState<Beer>();
+  const [ranking, setRanking] = useState<[string, number][] | null>(null);
 
   useEffect(() => {
     if (scoreEntity) {
-      const ranking = Object.entries(scoreEntity).sort((a, b) => b[1] - a[1]);
-      const firstBeer = beers.find(
-        (elt) => elt.key ?? elt.key === ranking[0][0]
+      const newRanking = Object.entries(scoreEntity).sort(
+        (a, b) => b[1] - a[1]
       );
-      const secondBeer = beers.find(
-        (elt) => elt.key ?? elt.key === ranking[1][0]
-      );
-      const thirdBeer = beers.find(
-        (elt) => elt.key ?? elt.key === ranking[2][0]
-      );
+      setRanking(newRanking);
+    }
+  }, [scoreEntity]);
+
+  useEffect(() => {
+    if (ranking && ranking.length > 0) {
+      const firstBeer = beers.find((elt) => elt.name === ranking[0]?.[0]);
+      const secondBeer = beers.find((elt) => elt.name === ranking[1]?.[0]);
+      const thirdBeer = beers.find((elt) => elt.name === ranking[2]?.[0]);
+
       setFirst(firstBeer);
       setSecond(secondBeer);
       setThird(thirdBeer);
     }
-  }, [scoreEntity, beers]);
+  }, [ranking, beers]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,7 +73,9 @@ export default function App() {
       <Hero hidden={scrolled} />
       <div className="z-50">
         <div className="mt-12">
-          <div className="flex flex-col max-w-screen-xl mx-auto gap-8 p-3 lg:p-8 rounded-3xl lg:bg-opacity-90">
+          <div
+            className="flex flex-col max-w-screen-xl mx-auto gap-8 p-3 lg:p-8 rounded-3xl lg:bg-opacity-90"
+            id="myDiv">
             {beers.map((elt) => (
               <BeerRating
                 onScoreChange={onIndividualScoreChange}
@@ -75,6 +89,9 @@ export default function App() {
           </div>
         </div>
         <Podium
+          first={first}
+          second={second}
+          third={third}
         />
       </div>
     </div>

@@ -42,12 +42,12 @@ export default function Hero({ hidden }: Props) {
 }
 
 export function goToBeer() {
-  const myDiv = document.querySelector(".myDiv");
+  const myDiv = document.querySelector("#myDiv");
 
   screen.width >= 1024
     ? myDiv?.scrollIntoView({
         behavior: "smooth",
-        block: "center",
+        block: "start",
         inline: "nearest",
       })
     : myDiv?.scrollIntoView({
