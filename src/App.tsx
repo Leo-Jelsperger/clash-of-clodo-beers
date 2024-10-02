@@ -22,28 +22,7 @@ export default function App() {
   const [first, setFirst] = useState<Beer>();
   const [second, setSecond] = useState<Beer>();
   const [third, setThird] = useState<Beer>();
-  const [ranking, setRanking] = useState<[string, number][] | null>(null);
-
-  useEffect(() => {
-    if (scoreEntity) {
-      const newRanking = Object.entries(scoreEntity).sort(
-        (a, b) => b[1] - a[1]
-      );
-      setRanking(newRanking);
-    }
-  }, [scoreEntity]);
-
-  useEffect(() => {
-    if (ranking && ranking.length > 0) {
-      const firstBeer = beers.find((elt) => elt.name === ranking[0]?.[0]);
-      const secondBeer = beers.find((elt) => elt.name === ranking[1]?.[0]);
-      const thirdBeer = beers.find((elt) => elt.name === ranking[2]?.[0]);
-
-      setFirst(firstBeer);
-      setSecond(secondBeer);
-      setThird(thirdBeer);
-    }
-  }, [ranking, beers]);
+  const [popUp, setPopUp] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,6 +40,22 @@ export default function App() {
     };
   }, []);
 
+  useEffect(() => {
+    if (scoreEntity) {
+      const newRanking = Object.entries(scoreEntity).sort(
+        (a, b) => b[1] - a[1]
+      );
+
+      const firstBeer = beers.find((elt) => elt.name === newRanking[0]?.[0]);
+      const secondBeer = beers.find((elt) => elt.name === newRanking[1]?.[0]);
+      const thirdBeer = beers.find((elt) => elt.name === newRanking[2]?.[0]);
+
+      setFirst(firstBeer);
+      setSecond(secondBeer);
+      setThird(thirdBeer);
+    }
+  }, [scoreEntity]);
+
   const onIndividualScoreChange = (score: number, name: string) => {
     setScoreEntity((s) => ({
       ...s,
@@ -68,32 +63,86 @@ export default function App() {
     }));
   };
 
+  const onCrossClick = () => {
+    const podium = document.querySelector("#podium");
+    const mainDiv = document.querySelector("#mainDiv");
+    podium?.classList.toggle("hidden");
+    podium?.classList.toggle("block");
+    podium?.classList.toggle("opacity-0");
+    podium?.classList.toggle("opacity-100");
+    mainDiv?.classList.toggle("brightness-100");
+  };
+
+  useEffect(() => {
+    const beerN = beers.length;
+    const rankN = Object.keys(scoreEntity).length;
+    if (beerN === rankN) {
+      setPopUp(true);
+    }
+  }, [scoreEntity]);
+
+  useEffect(() => {
+    if (popUp) {
+      const podium = document.querySelector("#podium");
+      const podiumBot = document.querySelector("#podiumBot");
+      const mainDiv = document.querySelector("#mainDiv");
+      podium?.classList.toggle("hidden");
+      podium?.classList.toggle("block");
+      podiumBot?.classList.toggle("hidden");
+      podiumBot?.classList.toggle("block");
+      setTimeout(() => {
+        podium?.classList.toggle("opacity-0");
+        podium?.classList.toggle("opacity-100");
+        mainDiv?.classList.toggle("brightness-[25%]");
+      }, 500);
+    }
+  }, [popUp]);
+
   return (
     <div className="flex flex-col text-black">
-      <Hero hidden={scrolled} />
-      <div className="z-50">
-        <div className="my-12">
-          <div
-            className="flex flex-col max-w-screen-xl mx-auto gap-8 p-3 lg:p-8 rounded-3xl lg:bg-opacity-90"
-            id="myDiv">
-            {beers.map((elt) => (
-              <BeerRating
-                onScoreChange={onIndividualScoreChange}
-                name={elt.name}
-                key={elt.key}
-                alcohol={elt.alcohol}
-                price={elt.price}
-                picture={elt.picture}
-              />
-            ))}
+      <div
+        className="w-[95dvw] h-[90dvh] lg:w-[85dvw] lg:h-[85dvh] mx-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fixed z-50 hidden opacity-0 transition-all duration-1000"
+        id="podium">
+        <Podium
+          first={first}
+          second={second}
+          third={third}
+          close={true}
+          onCrossClick={onCrossClick}
+        />
+      </div>
+      <div
+        id="mainDiv"
+        className="flex flex-col transition-all duration-500">
+        <Hero hidden={scrolled} />
+        <div className="z-20">
+          <div className="my-12">
+            <div
+              className="flex flex-col max-w-screen-xl mx-auto gap-8 p-3 lg:p-8 rounded-3xl lg:bg-opacity-90"
+              id="myDiv">
+              {beers.map((elt) => (
+                <BeerRating
+                  onScoreChange={onIndividualScoreChange}
+                  name={elt.name}
+                  key={elt.key}
+                  alcohol={elt.alcohol}
+                  price={elt.price}
+                  picture={elt.picture}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-        <div className="mb-12">
-          <Podium
-            first={first}
-            second={second}
-            third={third}
-          />
+          <div
+            className="max-w-screen-md h-96 mx-auto mb-12 hidden"
+            id="podiumBot">
+            <Podium
+              first={first}
+              second={second}
+              third={third}
+              close={false}
+              onCrossClick={onCrossClick}
+            />
+          </div>
         </div>
       </div>
     </div>
