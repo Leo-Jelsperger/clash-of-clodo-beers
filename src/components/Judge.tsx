@@ -1,14 +1,13 @@
-import { useState } from "react";
-
 interface Props {
   name: string;
+  score: number;
+  onScoreChange: (score: number) => void;
 }
 
-export default function Judge({ name }: Props) {
-  const [score, setScore] = useState(0);
-  const ScoreChange = (event: any) => {
-    console.log(event.target.value);
-    setScore(event.target.value);
+export default function Judge({ name, score, onScoreChange }: Props) {
+  const handleRangeChange = (event: any) => {
+    const newScore = Number(event.target.value);
+    onScoreChange(newScore);
   };
 
   return (
@@ -20,7 +19,7 @@ export default function Judge({ name }: Props) {
           min={0}
           max={10}
           value={score}
-          onChange={ScoreChange}
+          onChange={handleRangeChange}
           className="w-full flex justify-between mx-auto text-xs"
         />
         <div className="flex w-full justify-between mx-auto text-sm">

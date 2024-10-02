@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
-// import Judge from "./Judge";
+import Judge from "./Judge";
 
 interface Props {
   name: string;
@@ -8,6 +8,7 @@ interface Props {
   price: number;
   picture: string;
   onScoreChange?: (score: number, name: string) => void;
+  playerList?: string[];
 }
 
 export default function BeerRating({
@@ -16,41 +17,45 @@ export default function BeerRating({
   price,
   picture,
   onScoreChange = () => {},
+  playerList,
 }: Props) {
   const calc = alcohol && price ? alcohol / price : 0;
   const factor = calc.toPrecision(4);
 
-  const [scoreLaurent, setScoreLaurent] = useState(0);
-  const [scoreLeo, setScoreLeo] = useState(0);
+  const [playerScores, setPlayerScores] = useState<number[]>([]);
   const [averageTaste, setAverageTaste] = useState(0);
   const [finalScore, setFinalScore] = useState(0);
 
-  const RangeChangeLaurent = (event: any) => {
-    setScoreLaurent(event.target.value);
+  useEffect(() => {
+    setPlayerScores(new Array(playerList?.length).fill(0));
+  }, [playerList]);
+
+  const handleScoreChange = (index: number, score: number) => {
+    const newScores = [...playerScores];
+    newScores[index] = score;
+    setPlayerScores(newScores);
   };
 
-  const RangeChangeLeo = (event: any) => {
-    setScoreLeo(event.target.value);
-  };
+  useEffect(() => {
+    if (playerScores.length > 0) {
+      const sum = playerScores.reduce((acc, score) => acc + score, 0);
+      const average = sum / playerScores.length;
+      setAverageTaste(parseFloat(average.toFixed(1)));
+    }
+  }, [playerScores]);
 
-  function NewScore() {
-    const averageTaste = (Number(scoreLaurent) + Number(scoreLeo)) / 2;
-    setAverageTaste(averageTaste);
-    const score =
-      ((Number(scoreLaurent) + Number(scoreLeo)) / 20 + 1) * Number(factor);
+  const NewScore = () => {
+    const average =
+      playerScores.reduce((acc, score) => acc + score, 0) / playerScores.length;
+    const score = (average / 10 + 1) * Number(factor);
     const roundedScore = Math.round(score * 100) / 100;
     setFinalScore(roundedScore);
     onScoreChange(roundedScore, name);
-  }
-
-  useEffect(() => {
-    const averageTaste = (Number(scoreLaurent) + Number(scoreLeo)) / 2;
-    setAverageTaste(averageTaste);
-  }, [scoreLaurent, scoreLeo]);
+  };
 
   return (
-    <div className="flex flex-col lg:grid grid-cols-3 grid-rows-1 gap-8 p-8 w-full bg-gray-200 dark:bg-gray-400 rounded-2xl shadow-2xl ">
-      <div className="flex w-full mx-auto">
+    <div className="relative flex flex-col lg:grid grid-cols-3 grid-rows-1 gap-8 p-8 w-full bg-gray-200 dark:bg-gray-400 rounded-2xl shadow-2xl ">
+      <div className="flex w-full h-fit mx-auto lg:sticky top-8">
         <div className="card bg-base-100 w-full shadow-xl">
           <figure className="h-56 bg-white">
             <img
@@ -72,61 +77,14 @@ export default function BeerRating({
         </div>
       </div>
       <div className="col-span-2 flex flex-col gap-16 my-auto">
-        {/* <Judge name="Romuald" />
-        <Judge name="Clément" /> */}
-        <div className="flex flex-col w-auto mt-16 lg:mt-0 gap-4 items-center">
-          <p className="text-xl text-center w-full">Laurent</p>
-          <div className="flex flex-col w-full">
-            <input
-              type="range"
-              id="rangeLaurent"
-              min={0}
-              max={10}
-              value={scoreLaurent}
-              onChange={RangeChangeLaurent}
-              className="w-full flex justify-between mx-auto text-xs"
-            />
-            <div className="flex w-full justify-between mx-auto text-sm">
-              <span>0</span>
-              <span>1</span>
-              <span>2</span>
-              <span>3</span>
-              <span>4</span>
-              <span>5</span>
-              <span>6</span>
-              <span>7</span>
-              <span>8</span>
-              <span>9</span>
-              <span>10</span>
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-col w-auto gap-4 items-center">
-          <p className="text-xl text-center w-full">Léo</p>
-          <div className="flex flex-col w-full">
-            <input
-              type="range"
-              min={0}
-              max={10}
-              value={scoreLeo}
-              onChange={RangeChangeLeo}
-              className="w-full flex justify-between mx-auto text-xs"
-            />
-            <div className="flex w-full justify-between mx-auto text-sm">
-              <span>0</span>
-              <span>1</span>
-              <span>2</span>
-              <span>3</span>
-              <span>4</span>
-              <span>5</span>
-              <span>6</span>
-              <span>7</span>
-              <span>8</span>
-              <span>9</span>
-              <span>10</span>
-            </div>
-          </div>
-        </div>
+        {playerList?.map((player, index) => (
+          <Judge
+            key={index}
+            name={player}
+            score={playerScores[index] ?? 0}
+            onScoreChange={(score) => handleScoreChange(index, score)}
+          />
+        ))}
         <div className="flex flex-col w-full gap-4">
           <p className="text-center text-xl">Note moyenne pour le goût</p>
           <div className="h-16 aspect-square flex mx-auto bg-white rounded-full">

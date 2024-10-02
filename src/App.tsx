@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import BeerList from "./components/BeerList";
 import Podium from "./components/Podium";
 import Confetti from "react-confetti";
+import PlayersMenu from "./components/PlayersMenu";
 
 type Beer = {
   name: string;
@@ -14,7 +15,7 @@ type Beer = {
   picture: string;
 };
 
-const viewH = screen.height * 0.8;
+const viewH = screen.height * 0.7;
 const beers = BeerList();
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
   const [second, setSecond] = useState<Beer>();
   const [third, setThird] = useState<Beer>();
   const [popUp, setPopUp] = useState(false);
+  const [playerList, setPlayerList] = useState<string[]>([]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -105,6 +107,10 @@ export default function App() {
     }
   }, [popUp]);
 
+  const handlePlayerListUpdate = (newPlayerList: string[]) => {
+    setPlayerList(newPlayerList);
+  };
+
   return (
     <div className="flex flex-col text-black">
       <div
@@ -132,6 +138,7 @@ export default function App() {
             <div
               className="flex flex-col max-w-screen-xl mx-auto gap-8 p-3 lg:p-8 rounded-3xl lg:bg-opacity-90"
               id="myDiv">
+              <PlayersMenu onUpdatePlayerList={handlePlayerListUpdate} />
               {beers.map((elt) => (
                 <BeerRating
                   onScoreChange={onIndividualScoreChange}
@@ -140,6 +147,7 @@ export default function App() {
                   alcohol={elt.alcohol}
                   price={elt.price}
                   picture={elt.picture}
+                  playerList={playerList}
                 />
               ))}
             </div>
