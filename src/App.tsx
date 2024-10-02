@@ -4,6 +4,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import BeerList from "./components/BeerList";
 import Podium from "./components/Podium";
+import Confetti from "react-confetti";
 
 type Beer = {
   name: string;
@@ -66,11 +67,13 @@ export default function App() {
   const onCrossClick = () => {
     const podium = document.querySelector("#podium");
     const mainDiv = document.querySelector("#mainDiv");
+    const confetti = document.querySelector("#confetti");
     podium?.classList.toggle("hidden");
     podium?.classList.toggle("block");
     podium?.classList.toggle("opacity-0");
     podium?.classList.toggle("opacity-100");
     mainDiv?.classList.toggle("brightness-100");
+    confetti?.classList.toggle("hidden");
   };
 
   useEffect(() => {
@@ -86,14 +89,18 @@ export default function App() {
       const podium = document.querySelector("#podium");
       const podiumBot = document.querySelector("#podiumBot");
       const mainDiv = document.querySelector("#mainDiv");
+      const confetti = document.querySelector("#confetti");
       podium?.classList.toggle("hidden");
       podium?.classList.toggle("block");
       podiumBot?.classList.toggle("hidden");
       podiumBot?.classList.toggle("block");
+      confetti?.classList.toggle("hidden");
       setTimeout(() => {
         podium?.classList.toggle("opacity-0");
         podium?.classList.toggle("opacity-100");
         mainDiv?.classList.toggle("brightness-[25%]");
+        confetti?.classList.toggle("opacity-0");
+        confetti?.classList.toggle("opacity-100");
       }, 500);
     }
   }, [popUp]);
@@ -101,7 +108,12 @@ export default function App() {
   return (
     <div className="flex flex-col text-black">
       <div
-        className="w-[95dvw] h-[90dvh] lg:w-[85dvw] lg:h-[85dvh] mx-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fixed z-50 hidden opacity-0 transition-all duration-1000"
+        className="fixed top-0 left-0 z-50 hidden opacity-0 transition ease-in duration-[3000ms]"
+        id="confetti">
+        <Confetti />
+      </div>
+      <div
+        className="w-[95dvw] h-[90dvh] lg:w-[85dvw] lg:h-[85dvh] mx-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fixed z-40 hidden opacity-0 transition ease-in duration-1000"
         id="podium">
         <Podium
           first={first}
@@ -113,7 +125,7 @@ export default function App() {
       </div>
       <div
         id="mainDiv"
-        className="flex flex-col transition-all duration-500">
+        className="flex flex-col transition ease-in duration-500">
         <Hero hidden={scrolled} />
         <div className="z-20">
           <div className="my-12">

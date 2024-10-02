@@ -46,11 +46,6 @@ export default function BeerRating({
   useEffect(() => {
     const averageTaste = (Number(scoreLaurent) + Number(scoreLeo)) / 2;
     setAverageTaste(averageTaste);
-    // const score =
-    //   ((Number(scoreLaurent) + Number(scoreLeo)) / 20 + 1) * Number(factor);
-    // const roundedScore = Math.round(score * 100) / 100;
-    // setFinalScore(roundedScore);
-    // onScoreChange(roundedScore, name);
   }, [scoreLaurent, scoreLeo]);
 
   return (
@@ -138,9 +133,9 @@ export default function BeerRating({
             <p className="m-auto text-3xl font-bolder">{averageTaste}</p>
           </div>
         </div>
-        <div className="px-4 py-2 flex mx-auto bg-white rounded-xl hover:bg-gray-600 hover:text-white">
+        <div className="flex">
           <button
-            className="text-2xl"
+            className="px-4 py-2 flex mx-auto bg-white rounded-xl hover:bg-gray-600 hover:text-white text-2xl"
             onClick={NewScore}>
             Valider
           </button>
