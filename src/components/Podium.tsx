@@ -40,7 +40,9 @@ export default function Podium({
         />
       </div>
       <div className="col-start-2 row-start-4 flex">
-        <p className="m-auto text-black text-xl font-semibold">{first?.name}</p>
+        <p className="m-auto text-black lg:text-xl font-semibold text-center">
+          {first?.name}
+        </p>
       </div>
       <div className="col-start-2 row-start-3 flex bg-white w-fit mx-auto rounded-xl p-1">
         <img
@@ -56,7 +58,7 @@ export default function Podium({
       </div>
 
       <div className="col-start-1 row-start-5 flex">
-        <p className="m-auto text-black text-xl font-semibold">
+        <p className="m-auto text-black lg:text-xl font-semibold text-center">
           {second?.name}
         </p>
       </div>
@@ -74,7 +76,9 @@ export default function Podium({
       </div>
 
       <div className="col-start-3 row-start-6 flex">
-        <p className="m-auto text-black text-xl font-semibold">{third?.name}</p>
+        <p className="m-auto text-black lg:text-xl font-semibold text-center">
+          {third?.name}
+        </p>
       </div>
       <div className="col-start-3 row-start-5 flex bg-white w-fit mx-auto rounded-xl p-1">
         <img
