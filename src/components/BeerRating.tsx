@@ -8,7 +8,7 @@ interface Props {
   price: number;
   picture: string;
   onScoreChange?: (score: number, name: string) => void;
-  playerList?: string[];
+  playerList: string[];
 }
 
 export default function BeerRating({
@@ -45,12 +45,17 @@ export default function BeerRating({
   }, [playerScores]);
 
   const NewScore = () => {
-    const average =
-      playerScores.reduce((acc, score) => acc + score, 0) / playerScores.length;
-    const score = (average / 10 + 1) * Number(factor);
-    const roundedScore = Math.round(score * 100) / 100;
-    setFinalScore(roundedScore);
-    onScoreChange(roundedScore, name);
+    if (!playerList || playerList.length === 0) {
+      alert("Ajoutez au moins un dégustateur.");
+    } else {
+      const average =
+        playerScores.reduce((acc, score) => acc + score, 0) /
+        playerScores.length;
+      const score = (average / 10 + 1) * Number(factor);
+      const roundedScore = Math.round(score * 100) / 100;
+      setFinalScore(roundedScore);
+      onScoreChange(roundedScore, name);
+    }
   };
 
   return (
