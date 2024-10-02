@@ -27,16 +27,16 @@ export default function PlayersMenu({ onUpdatePlayerList }: any) {
   return (
     <div className="flex flex-col gap-8 p-8 w-full bg-gray-200 dark:bg-gray-400 rounded-2xl shadow-2xl text-center">
       <p className="text-xl lg:text-4xl font-bold">Ajouter des dégustateurs</p>
-      <form className="flex flex-col lg:flex-row mx-auto gap-4 lg:text-xl">
+      <form className="flex flex-col lg:flex-row w-3/4 lg:w-auto mx-auto gap-4 lg:text-xl">
         <input
           type="text"
           placeholder="Nom du dégustateur"
-          className="px-4 py-2 bg-white rounded-full"
+          className="px-4 py-2 bg-white rounded-full text-center"
           value={playerName}
           onChange={handleInputChange}
         />
         <button
-          className="px-4 py-2 bg-gray-500 rounded-full text-white font-semibold hover:text-black hover:bg-white"
+          className="px-4 py-2 bg-gray-500 rounded-full text-white font-semibold hover:text-black hover:bg-white text-center"
           onClick={handleAddPlayer}>
           Ajouter le dégustateur
         </button>
