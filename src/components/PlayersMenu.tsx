@@ -45,7 +45,7 @@ export default function PlayersMenu({ onUpdatePlayerList }: any) {
         {playerList.map((player, index) => (
           <div
             key={index}
-            className="grid grid-cols-2 grid-rows-1 w-1/2 mx-auto py-2 rounded-full bg-gray-300">
+            className="grid grid-cols-2 grid-rows-1 w-full lg:w-1/2 mx-auto py-2 rounded-full bg-gray-300">
             <li className="mr-auto px-8">{player}</li>
             <button
               onClick={() => deletePlayer(index)}
