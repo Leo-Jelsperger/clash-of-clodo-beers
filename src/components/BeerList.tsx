@@ -74,14 +74,14 @@ export default function BeerList() {
       key: "biere_du_corbeau",
       alcohol: 9,
       price: 1.87,
-      picture: "/beer-pictures/biere-du-corbeau-9.webp",
+      picture: "./beer-pictures/biere-du-corbeau-9.webp",
     },
     {
       name: "Kronenbourg Blonde Extra Intense",
       key: "kronenbourg_extra",
       alcohol: 9,
       price: 1.54,
-      picture: "/beer-pictures/kronenbourg-9.webp",
+      picture: "./beer-pictures/kronenbourg-9.webp",
     },
     {
       name: "8.6",
@@ -109,7 +109,7 @@ export default function BeerList() {
       key: "extra_strong_10",
       alcohol: 10,
       price: 1.2,
-      picture: "/beer-pictures/extra-strong.webp",
+      picture: "./beer-pictures/extra-strong.webp",
     },
     {
       name: "Falsbourg 8",
