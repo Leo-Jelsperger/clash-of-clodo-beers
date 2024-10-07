@@ -20,7 +20,7 @@ export default function BeerRating({
   playerList,
 }: Props) {
   const calc = alcohol && price ? alcohol / price : 0;
-  const factor = calc.toPrecision(4);
+  const factor = calc.toPrecision(3);
 
   const [playerScores, setPlayerScores] = useState<number[]>([]);
   const [averageTaste, setAverageTaste] = useState(0);
