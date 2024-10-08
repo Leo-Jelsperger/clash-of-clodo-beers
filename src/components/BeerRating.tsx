@@ -70,7 +70,9 @@ export default function BeerRating({
             />
           </figure>
           <div className="card-body bg-stone-400">
-            <h2 className="card-title text-2xl mx-auto my-8">{name}</h2>
+            <h2 className="card-title text-center text-2xl mx-auto my-8">
+              {name}
+            </h2>
             <p className="text-center w-full">Degré alcoolique : {alcohol}°</p>
             <p className="text-center w-full">Prix : {price}€</p>
             <p className="text-center w-full">Clodo Factor : {factor}</p>
