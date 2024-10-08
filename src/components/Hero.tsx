@@ -7,8 +7,7 @@ export default function Hero({ hidden }: Props) {
     <div
       className="hero min-h-dvh sticky top-0"
       style={{
-        backgroundImage:
-          "url(https://www.pixelstalk.net/wp-content/uploads/2016/07/Beer-Image-HD.jpg)",
+        backgroundImage: "url(./hero-background.webp)",
       }}>
       <div className="hero-overlay bg-opacity-60 backdrop-blur-[2px]"></div>
       <div
