@@ -25,9 +25,9 @@ export default function Hero({ hidden }: Props) {
             Être clodo, ce n'est pas qu'une situtation financière, c'est aussi
             un art de vivre. Au même titre qu'un Château-Neuf-Du-Pape est un
             compagnon essentiel du riche entrepreneur, la 8.6 est l'ami le plus
-            fidèle du mendiant. <br /> <br /> Mais la 8.6 est-elle vraiment son
-            amie la plus réconfortante ? C'est ce que nous allons découvrir
-            ensemble.
+            fidèle du mendiant. <br /> <br /> Mais cette fameuse 8.6 est-elle
+            vraiment son la plus réconfortante ? C'est ce que nous allons tenter
+            de découvrir ensemble.
           </p>
           <button
             className="bg-white text-black px-4 py-2 rounded-lg"
